@@ -12,6 +12,7 @@ const gameList = document.getElementById('gameList');
 const borrowerName = document.getElementById('borrowerName');
 const message = document.getElementById('message');
 const gameSelectVal = Number(gameSelect.value.trim());
+const freeGame = document.getElementById('freeGame');
 
 renderGames();
 
@@ -46,34 +47,77 @@ returnButton.addEventListener('click', () => {
     }
 });
 
+freeGame.addEventListener('change', () => {
+    if (freeGame.checked) {
+        renderGames();
+    }
+    else {
+        renderGames();
+    }
+});
 
 function renderGames() {
     gameList.innerHTML = '';
+    if (freeGame.checked) {
 
-    games.forEach((game, index) => {
-        const item = document.createElement('li');
-        item.className = 'item';
+        games.forEach((freeGames, index) => {
+            if (games[index].borrower === null) {
+                const item = document.createElement('li');
+                item.className = 'item';
 
-        const div = document.createElement('div');
-        div.className = 'div';
+                const div = document.createElement('div');
+                div.className = 'div';
 
-        const title = document.createElement('h1');
-        title.className = 'title';
-        title.textContent = games[index].title;
+                const title = document.createElement('h1');
+                title.className = 'title';
+                title.textContent = games[index].title;
 
-        const players = document.createElement('p');
-        players.className = 'players'
-        players.textContent = games[index].players;
+                const players = document.createElement('p');
+                players.className = 'players'
+                players.textContent = games[index].players;
 
-        const borrower = document.createElement('p')
-        borrower.className = 'borrower'
-        borrower.textContent = games[index].borrower;
+                const borrower = document.createElement('p')
+                borrower.className = 'borrower'
+                borrower.textContent = games[index].borrower;
 
 
-        div.append(borrower, players, title);
-        item.append(div);
-        gameList.append(item);
-    });
+                div.append(borrower, players, title);
+                item.append(div);
+                gameList.append(item);
+            }
+            else {
+                message.innerHTML = 'Свободных игр пока нет';
+            }
+        });
+
+
+    }
+    else {
+        games.forEach((game, index) => {
+            const item = document.createElement('li');
+            item.className = 'item';
+
+            const div = document.createElement('div');
+            div.className = 'div';
+
+            const title = document.createElement('h1');
+            title.className = 'title';
+            title.textContent = games[index].title;
+
+            const players = document.createElement('p');
+            players.className = 'players'
+            players.textContent = games[index].players;
+
+            const borrower = document.createElement('p')
+            borrower.className = 'borrower'
+            borrower.textContent = games[index].borrower;
+
+
+            div.append(borrower, players, title);
+            item.append(div);
+            gameList.append(item);
+        });
+    }
 }
 
 renderGames();
