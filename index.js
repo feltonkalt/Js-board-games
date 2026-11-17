@@ -11,7 +11,9 @@ const gameSelect = document.getElementById('gameSelect');
 const gameList = document.getElementById('gameList');
 const borrowerName = document.getElementById('borrowerName');
 const message = document.getElementById('message');
- const gameSelectVal = Number(gameSelect.value.trim());
+const gameSelectVal = Number(gameSelect.value.trim());
+
+renderGames();
 
 
 borrowButton.addEventListener('click', () => {
@@ -27,19 +29,19 @@ borrowButton.addEventListener('click', () => {
         message.innerHTML = `Игра выдана: ${borrowerNameVal}`
         renderGames();
     }
-    else if(games[gameSelectVal].borrower !== null){
+    else if (games[gameSelectVal].borrower !== null) {
         message.innerHTML = `Игра уже выдана: ${games[gameSelectVal].borrower}`
     }
 });
 returnButton.addEventListener('click', () => {
     games[gameSelectVal];
 
-    if(games[gameSelectVal].borrower !== null){
+    if (games[gameSelectVal].borrower !== null) {
         message.innerHTML = 'Игра возвращена';
         games[gameSelectVal].borrower = null;
         renderGames();
     }
-    else if(game[gameSelectVal.borrower == null]){
+    else if (game[gameSelectVal.borrower == null]) {
         message.innerHTML = 'Игра уже свободна'
     }
 });
@@ -48,7 +50,7 @@ returnButton.addEventListener('click', () => {
 function renderGames() {
     gameList.innerHTML = '';
 
-    gameList.forEach((game, index) => {
+    games.forEach((game, index) => {
         const item = document.createElement('li');
         item.className = 'item';
 
@@ -57,19 +59,20 @@ function renderGames() {
 
         const title = document.createElement('h1');
         title.className = 'title';
-        title.textContent = games[gameSelectVal].title;
+        title.textContent = games[index].title;
 
         const players = document.createElement('p');
         players.className = 'players'
-        players.textContent = games[gameSelectVal].players;
+        players.textContent = games[index].players;
 
         const borrower = document.createElement('p')
         borrower.className = 'borrower'
-        borrower.textContent = games[gameSelectVal].borrower;
+        borrower.textContent = games[index].borrower;
 
 
         div.append(borrower, players, title);
         item.append(div);
+        gameList.append(item);
     });
 }
 
