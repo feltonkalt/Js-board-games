@@ -1,4 +1,4 @@
-const games = [
+let games = [
     { title: 'Каркассон', players: '4', borrower: null },
     { title: 'Доббль', players: '6', borrower: 'Аня' },
     { title: 'Шахматы', players: '2', borrower: null },
@@ -13,9 +13,16 @@ const borrowerName = document.getElementById('borrowerName');
 const message = document.getElementById('message');
 const gameSelectVal = Number(gameSelect.value.trim());
 const freeGame = document.getElementById('freeGame');
+const NameGame = document.getElementById('NameGame');
+const PlayerGame = document.getElementById('PlayersGame');
+const addGame = document.getElementById('addGame');
 
 renderGames();
 
+addGame.addEventListener('click', () => {
+    addGameFunc();
+    renderGames();
+});
 
 borrowButton.addEventListener('click', () => {
     const borrowerNameVal = borrowerName.value.trim();
@@ -89,8 +96,6 @@ function renderGames() {
                 message.innerHTML = 'Свободных игр пока нет';
             }
         });
-
-
     }
     else {
         games.forEach((game, index) => {
@@ -121,3 +126,14 @@ function renderGames() {
 }
 
 renderGames();
+
+
+function addGameFunc() {
+    const NameGameVal = NameGame.value.trim();
+    const PlayerGameVal = Number(PlayerGame.value.trim());
+    games.push({
+        title: NameGameVal,
+        players: PlayerGameVal,
+        borrower: null,
+    })
+};
