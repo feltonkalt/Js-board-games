@@ -158,9 +158,10 @@ function renderOptions(){
     games.forEach((element, index) => {
     
         const options = document.createElement('option');
-        option.className = 'option';
-        option.textContent = games[index].title;
+        options.className = 'option';
+        options.textContent = games[index].title;
+        options.value
 
-        games.append(options);
+        gameSelectUl.append(options);
     });
 };

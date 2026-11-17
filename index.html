@@ -7,36 +7,46 @@
     <title>Document</title>
     <script src="index.js" defer></script>
     <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:ital,wght@0,700;1,700&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
-    <h1>Прокат настольных игр</h1>
-    <input type="checkbox" id='freeGame'>
-    <label for="freeGame"> показать только свободные игры</label>
-    <ul id="gameList"></ul>
+    <div class="container">
+        <div class="all">
+            <h1 class="zag">Прокат настольных игр</h1>
+            <div class="ptoct">
+                <input type="checkbox" id='freeGame'>
+                <label for="freeGame" class="freeGame"> показать только свободные игры</label>
+                <ul id="gameList"></ul>
+            </div>
+            <div class="Procat">
+                <h1>Прокат игр</h1>
+                <label for="borrowerName">Имя посетителя</label>
+                <input id="borrowerName" type="text">
+                <button id="borrowButton" type="button">Выдать</button>
+                <button id="returnButton" type="button">Вернуть</button>
+                <p id="message"></p>
+                <label for="gameSelect">Игра</label>
+                <select id="gameSelect">
+                    <ul id="gameSelectUl"></ul>
+                </select>
+            </div>
 
-    <label for="gameSelect">Игра</label>
-    <select id="gameSelect">
-        <ul id="gameSelectUl"></ul>
-        <option value="0">Каркассон</option>
-        <option value="1">Доббль</option>
-        <option value="2">Шахматы</option>
-    </select>
+            <div class="add">
+                <h1>Добавить игру</h1>
+                <label for="NameGame"> Введите название игры</label>
+                <input type="text" id="NameGame">
+                <label for="PlayersGame">Введите кол-во игроков</label>
+                <input type="text" id="PlayersGame">
+                <button id="addGame">Добавить игру</button>
+            </div>
+        </div>
+    </div>
 
-    <h1>Прокат игр</h1>
-    <label for="borrowerName">Имя посетителя</label>
-    <input id="borrowerName" type="text">
-    <button id="borrowButton" type="button">Выдать</button>
-    <button id="returnButton" type="button">Вернуть</button>
-    <p id="message"></p>
-
-
-    <h1>Добавить игру</h1>
-    <label for="NameGame"> Введите название игры</label>
-    <input type="text" id="NameGame">
-    <label for="PlayersGame">Введите кол-во игроков</label>
-    <input type="text" id="PlayersGame">
-    <button id="addGame">Добавить игру</button>
 </body>
 
 </html>
