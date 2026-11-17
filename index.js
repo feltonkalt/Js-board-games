@@ -39,7 +39,9 @@ returnButton.addEventListener('click', () => {
         games[gameSelectVal].borrower = null;
         renderGames();
     }
-    else if(game)
+    else if(game[gameSelectVal.borrower == null]){
+        message.innerHTML = 'Игра уже свободна'
+    }
 });
 
 
