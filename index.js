@@ -1,8 +1,9 @@
 const games = [
-    { title: 'Каркассон', plaers: '4', borrower: null },
-    { title: 'Доббль', plaers: '6', borrower: 'Аня' },
-    { title: 'Шахматы', plaers: '2', borrower: null },
+    { title: 'Каркассон', players: '4', borrower: null },
+    { title: 'Доббль', players: '6', borrower: 'Аня' },
+    { title: 'Шахматы', players: '2', borrower: null },
 ];
+
 
 const borrowButton = document.getElementById('borrowButton');
 const returnButton = document.getElementById('returnButton');
@@ -10,10 +11,10 @@ const gameSelect = document.getElementById('gameSelect');
 const gameList = document.getElementById('gameList');
 const borrowerName = document.getElementById('borrowerName');
 const message = document.getElementById('message');
+ const gameSelectVal = Number(gameSelect.value.trim());
 
 
 borrowButton.addEventListener('click', () => {
-    const gameSelectVal = Number(gameSelect.value.trim());
     const borrowerNameVal = borrowerName.value.trim();
 
     games[gameSelectVal];
@@ -31,7 +32,6 @@ borrowButton.addEventListener('click', () => {
     }
 });
 returnButton.addEventListener('click', () => {
-    const gameSelectVal = Number(gameSelect.value);
     games[gameSelectVal];
 
     if(games[gameSelectVal].borrower !== null){
@@ -57,16 +57,20 @@ function renderGames() {
 
         const title = document.createElement('h1');
         title.className = 'title';
+        title.textContent = games[gameSelectVal].title;
 
         const players = document.createElement('p');
         players.className = 'players'
+        players.textContent = games[gameSelectVal].players;
 
         const borrower = document.createElement('p')
         borrower.className = 'borrower'
+        borrower.textContent = games[gameSelectVal].borrower;
+
 
         div.append(borrower, players, title);
         item.append(div);
     });
-
-
 }
+
+renderGames();
