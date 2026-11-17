@@ -114,11 +114,11 @@ function renderGames() {
 
             const players = document.createElement('p');
             players.className = 'players'
-            players.textContent = games[index].players;
+            players.textContent = `Игроки: ${games[index].players}`;
 
             const borrower = document.createElement('p')
             borrower.className = 'borrower'
-            borrower.textContent = games[index].borrower;
+            borrower.textContent = `Занято: ${games[index].borrower}`;
 
 
             div.append(borrower, players, title);
