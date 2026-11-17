@@ -16,12 +16,15 @@ const freeGame = document.getElementById('freeGame');
 const NameGame = document.getElementById('NameGame');
 const PlayerGame = document.getElementById('PlayersGame');
 const addGame = document.getElementById('addGame');
+const gameSelectUl = document.getElementById('gameSelectUl');
 
 renderGames();
+renderOptions();
 
 addGame.addEventListener('click', () => {
     addGameFunc();
     renderGames();
+    renderOptions();
 });
 
 borrowButton.addEventListener('click', () => {
@@ -131,9 +134,33 @@ renderGames();
 function addGameFunc() {
     const NameGameVal = NameGame.value.trim();
     const PlayerGameVal = Number(PlayerGame.value.trim());
-    games.push({
-        title: NameGameVal,
-        players: PlayerGameVal,
-        borrower: null,
-    })
+
+    if (NameGameVal === "" || PlayerGameVal === "") {
+        alert('Введите что-нибудь');
+        return;
+    }
+    if (isNaN(PlayerGameVal) || PlayerGameVal <= 0) {
+        alert('Введите кол-во игроков от 1');
+        return;
+    }
+    else {
+        games.push({
+            title: NameGameVal,
+            players: PlayerGameVal,
+            borrower: null,
+        })
+    }
+};
+
+function renderOptions(){
+    gameSelectUl.innerHTML = '';
+
+    games.forEach((element, index) => {
+    
+        const options = document.createElement('option');
+        option.className = 'option';
+        option.textContent = games[index].title;
+
+        games.append(options);
+    });
 };
