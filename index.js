@@ -1,7 +1,7 @@
 let games = [
-    { title: 'Каркассон', players: '4', borrower: null, quantity: 4, },
-    { title: 'Доббль', players: '6', borrower: 'Аня', quantity: 3 },
-    { title: 'Шахматы', players: '2', borrower: null, quantity: 5 },
+    { title: 'Каркассон', players: '4', borrower: [null], quantity: 4, },
+    { title: 'Доббль', players: '6', borrower: ['Аня'], quantity: 3 },
+    { title: 'Шахматы', players: '2', borrower: [null], quantity: 5 },
 ];
 
 
@@ -48,16 +48,16 @@ borrowButton.addEventListener('click', () => {
             message.innerHTML = 'Введите имя'
         }
         else if (games[gameSelectVal].borrower == null) {
-            games[gameSelectVal].borrower = borrowerNameVal;
-            message.innerHTML = `Игра выдана: ${borrowerNameVal}`
+            games[gameSelectVal].borrower.push(borrowerNameVal);
+            message.innerHTML = `Игра выдана: ${borrowerNameVal}`;
             games[gameSelectVal].quantity -= 1;
             renderGames();
         }
         else if (games[gameSelectVal].borrower != null) {
-            games[gameSelectVal].borrower += borrowerNameVal;
+            games[gameSelectVal].borrower.push(borrowerNameVal);
             message.innerHTML = `Игра выдана: ${borrowerNameVal}`
             games[gameSelectVal].quantity -= 1;
-            renderGames(); 
+            renderGames();
         }
         else if (games[gameSelectVal].borrower > games[gameSelectVal].quantity) {
             message.innerHTML = `Игра уже выдана: ${games[gameSelectVal].borrower}`
@@ -73,13 +73,22 @@ borrowButton.addEventListener('click', () => {
 
 returnButton.addEventListener('click', () => {
     games[gameSelectVal];
+    const borrowerNameVal = borrowerName.value.trim();
 
-    if (games[gameSelectVal].borrower !== null) {
-        message.innerHTML = 'Игра возвращена';
-        games[gameSelectVal].borrower = null;
-        renderGames();
+    if (borrowerNameVal == null) {
+        message.innerHTML = 'Введите имя пользователя'
     }
-    else if (game[gameSelectVal.borrower == null]) {
+    else if (games[gameSelectVal].borrower == borrowerNameVal) {
+        message.innerHTML = 'Игра возвращена';
+        games[gameSelectVal].borrower.forEach(borrower => {
+            if (games[gameSelectVal].borrower == borrowerNameVal) {
+                games[gameSelectVal].borrower.splice(borrower)
+            }
+        });
+        games[gameSelectVal].quantity += 1;
+        renderGames()
+    }
+    else if (games[gameSelectVal.QuantityGameVal < 0]) {
         message.innerHTML = 'Игра уже свободна'
     }
 });
@@ -100,7 +109,7 @@ function renderGames() {
     if (freeGame.checked) {
 
         games.forEach((freeGames, index) => {
-            if (games[index].borrower === null) {
+            if (games[index].quantity > 0) {
                 const item = document.createElement('li');
                 item.className = 'item';
 
@@ -117,14 +126,15 @@ function renderGames() {
 
                 const borrower = document.createElement('p')
                 borrower.className = 'borrower'
-                borrower.textContent = games[index].borrower;
+                borrower.textContent += games[index].borrower.join('|');
 
                 const quantityGames = document.createElement('p');
                 quantityGames.className = 'quantity';
                 quantityGames.textContent = ` Всего игр: ${games[index].quantity}`;
 
-                div.append(title, players, quantity, borrower);
+                div.append(title, players, quantityGames, borrower);
                 item.append(div);
+
                 gameList.append(item);
 
             }
@@ -147,7 +157,10 @@ function renderGames() {
 
             const borrower = document.createElement('p')
             borrower.className = 'borrower'
-            borrower.textContent = games[index].borrower ;
+            if (game.borrower) {
+                console.log(game.borrower)
+                borrower.textContent = game.borrower.join('|');
+            }
 
             const players = document.createElement('p');
             players.className = 'players'
