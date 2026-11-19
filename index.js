@@ -1,8 +1,9 @@
 let games = [
-    { title: 'Каркассон', players: '4', borrower: null },
-    { title: 'Доббль', players: '6', borrower: 'Аня' },
-    { title: 'Шахматы', players: '2', borrower: null },
+    { title: 'Каркассон', players: '4', borrower: null, quantity: 4, },
+    { title: 'Доббль', players: '6', borrower: 'Аня', quantity: 3 },
+    { title: 'Шахматы', players: '2', borrower: null, quantity: 5 },
 ];
+
 
 
 const borrowButton = document.getElementById('borrowButton');
@@ -17,15 +18,25 @@ const NameGame = document.getElementById('NameGame');
 const PlayerGame = document.getElementById('PlayersGame');
 const addGame = document.getElementById('addGame');
 const gameSelectUl = document.getElementById('gameSelectUl');
+const QuantityGame = document.getElementById('QuantityGame');
+
+
 
 renderGames();
 renderOptions();
+
+
+
+
 
 addGame.addEventListener('click', () => {
     addGameFunc();
     renderGames();
     renderOptions();
 });
+
+
+
 
 borrowButton.addEventListener('click', () => {
     const borrowerNameVal = borrowerName.value.trim();
@@ -44,6 +55,9 @@ borrowButton.addEventListener('click', () => {
         message.innerHTML = `Игра уже выдана: ${games[gameSelectVal].borrower}`
     }
 });
+
+
+
 returnButton.addEventListener('click', () => {
     games[gameSelectVal];
 
@@ -56,6 +70,8 @@ returnButton.addEventListener('click', () => {
         message.innerHTML = 'Игра уже свободна'
     }
 });
+
+
 
 freeGame.addEventListener('change', () => {
     if (freeGame.checked) {
@@ -84,16 +100,20 @@ function renderGames() {
 
                 const players = document.createElement('p');
                 players.className = 'players'
-                players.textContent = games[index].players;
+                players.textContent = `Игроки: ${games[index].players}`;
 
                 const borrower = document.createElement('p')
                 borrower.className = 'borrower'
                 borrower.textContent = games[index].borrower;
 
+                const quantityGames = document.createElement('p');
+                quantityGames.className = 'quantity';
+                quantityGames.textContent = ` Всего игр: ${games[index].quantity}`;
 
-                div.append(borrower, players, title);
+                div.append(title, players, quantity, borrower);
                 item.append(div);
                 gameList.append(item);
+
             }
             else {
                 message.innerHTML = 'Свободных игр пока нет';
@@ -112,16 +132,19 @@ function renderGames() {
             title.className = 'title';
             title.textContent = games[index].title;
 
+            const borrower = document.createElement('p')
+            borrower.className = 'borrower'
+            borrower.textContent = games[index].borrower;
+
             const players = document.createElement('p');
             players.className = 'players'
             players.textContent = `Игроки: ${games[index].players}`;
 
-            const borrower = document.createElement('p')
-            borrower.className = 'borrower'
-            borrower.textContent = `Занято: ${games[index].borrower}`;
+            const quantityGames = document.createElement('p');
+            quantityGames.className = 'quantity';
+            quantityGames.textContent = `Всего игр: ${games[index].quantity}`;
 
-
-            div.append(borrower, players, title);
+            div.append(title, players, quantityGames, borrower);
             item.append(div);
             gameList.append(item);
         });
@@ -134,7 +157,12 @@ renderGames();
 function addGameFunc() {
     const NameGameVal = NameGame.value.trim();
     const PlayerGameVal = Number(PlayerGame.value.trim());
+    const QuantityGameVal = Number(QuantityGame.value.trim());
 
+    if (isNaN(QuantityGameVal) || QuantityGameVal <= 0) {
+        alert('Введите кол-во экземпляров от 0');
+        return;
+    }
     if (NameGameVal === "" || PlayerGameVal === "") {
         alert('Введите что-нибудь');
         return;
@@ -148,15 +176,18 @@ function addGameFunc() {
             title: NameGameVal,
             players: PlayerGameVal,
             borrower: null,
+            quantity: QuantityGameVal,
         })
     }
+
+
 };
 
-function renderOptions(){
+function renderOptions() {
     gameSelectUl.innerHTML = '';
 
     games.forEach((element, index) => {
-    
+
         const options = document.createElement('option');
         options.className = 'option';
         options.textContent = games[index].title;

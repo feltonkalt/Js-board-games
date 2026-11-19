@@ -28,11 +28,13 @@ body {
     grid-template-columns: 5% 90% 5%;
     display: grid;
     height: auto;
+    box-shadow: 0px 2px 20px rgb(156, 119, 78);
 }
 
 .all {
     grid-row: 2;
     grid-column: 2;
+    
 }
 
 .zag {
@@ -45,7 +47,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgb(106, 37, 115);
+    color: rgb(67, 44, 70);
 }
 
 .ptoct {}
@@ -57,9 +59,9 @@ body {
     font-style: normal;
     font-variation-settings:
         "wdth" 100;
-    font-size: 25px;
-    color: rgb(27, 16, 37);
-    margin-bottom: 15px;
+    font-size: 20px;
+    color: rgb(47, 34, 59);
+    margin-bottom: 30px;
 }
 
 .Procat {
@@ -69,4 +71,12 @@ body {
 
 ul {
     list-style-type: none;
+}
+.divProcat{
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+.add{
+   
 }

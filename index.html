@@ -18,22 +18,24 @@
     <div class="container">
         <div class="all">
             <h1 class="zag">Прокат настольных игр</h1>
-            <div class="ptoct">
-                <input type="checkbox" id='freeGame'>
-                <label for="freeGame" class="freeGame"> показать только свободные игры</label>
-                <ul id="gameList"></ul>
-            </div>
-            <div class="Procat">
-                <h1>Прокат игр</h1>
-                <label for="borrowerName">Имя посетителя</label>
-                <input id="borrowerName" type="text">
-                <button id="borrowButton" type="button">Выдать</button>
-                <button id="returnButton" type="button">Вернуть</button>
-                <p id="message"></p>
-                <label for="gameSelect">Игра</label>
-                <select id="gameSelect">
-                    <ul id="gameSelectUl"></ul>
-                </select>
+            <div class="divProcat">
+                <div class="ptoct">
+                    <input type="checkbox" id='freeGame'>
+                    <label for="freeGame" class="freeGame"> показать только свободные игры</label>
+                    <ul id="gameList"></ul>
+                </div>
+                <div class="Procat">
+                    <h1>Прокат игр</h1>
+                    <label for="borrowerName">Имя посетителя</label>
+                    <input id="borrowerName" type="text">
+                    <button id="borrowButton" type="button">Выдать</button>
+                    <button id="returnButton" type="button">Вернуть</button>
+                    <p id="message"></p>
+                    <label for="gameSelect">Игра</label>
+                    <select id="gameSelect">
+                        <ul id="gameSelectUl"></ul>
+                    </select>
+                </div>
             </div>
 
             <div class="add">
@@ -42,6 +44,8 @@
                 <input type="text" id="NameGame">
                 <label for="PlayersGame">Введите кол-во игроков</label>
                 <input type="text" id="PlayersGame">
+                <label for="QuantityGame"> Введите кол-во экземпляров</label>
+                <input type="text" id="QuantityGame">
                 <button id="addGame">Добавить игру</button>
             </div>
         </div>
