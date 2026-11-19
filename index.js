@@ -17,6 +17,8 @@ const NameGame = document.getElementById('NameGame');
 const PlayerGame = document.getElementById('PlayersGame');
 const addGame = document.getElementById('addGame');
 const QuantityGame = document.getElementById('QuantityGame');
+const redactQuantity = document.getElementById('redactQuantity');
+const newQuantity = document.getElementById('NewQuantity');
 
 
 
@@ -33,7 +35,18 @@ addGame.addEventListener('click', () => {
     renderOptions();
 });
 
+newQuantity.addEventListener('click', () => {
+    const gameSelectVal = +gameSelect.value
+    const redactQuantityVal = Number(redactQuantity.value);
 
+    if (isNaN(redactQuantityVal) || redactQuantityVal <= 0) {
+        alert('Введите число от 1');
+        return;
+    }
+
+    games[gameSelectVal].quantity += redactQuantityVal;
+    renderGames()
+});
 
 
 borrowButton.addEventListener('click', () => {
@@ -120,7 +133,12 @@ function renderGames() {
             quantityGames.className = 'quantity';
             quantityGames.textContent = ` Всего игр: ${games[index].quantity}`;
 
-            div.append(title, players, quantityGames, borrower);
+            const giveGame = document.createElement('p');
+            giveGame.className = 'giveGame';
+            giveGame.textContent = `Выдано: ${games[index].borrower.length}`;
+
+
+            div.append(title, players, quantityGames, borrower, giveGame);
             item.append(div);
 
             gameList.append(item);
@@ -154,7 +172,11 @@ function renderGames() {
             quantityGames.className = 'quantity';
             quantityGames.textContent = `Всего игр: ${games[index].quantity}`;
 
-            div.append(title, players, quantityGames, borrower);
+            const giveGame = document.createElement('p');
+            giveGame.className = 'giveGame';
+            giveGame.textContent = `Выдано: ${games[index].borrower.length}`;
+
+            div.append(title, players, quantityGames, borrower, giveGame);
             item.append(div);
             gameList.append(item);
         });
@@ -170,7 +192,7 @@ function addGameFunc() {
     const QuantityGameVal = Number(QuantityGame.value.trim());
 
     if (isNaN(QuantityGameVal) || QuantityGameVal <= 0) {
-        alert('Введите кол-во экземпляров от 0');
+        alert('Введите кол-во экземпляров от 1');
         return;
     }
     if (NameGameVal === "" || PlayerGameVal === "") {
