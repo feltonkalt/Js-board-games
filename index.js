@@ -43,17 +43,30 @@ borrowButton.addEventListener('click', () => {
 
     games[gameSelectVal];
 
-    if (borrowerNameVal == null) {
-        message.innerHTML = 'Введите имя'
+    if (games[gameSelectVal].quantity > 0) {
+        if (borrowerNameVal == null) {
+            message.innerHTML = 'Введите имя'
+        }
+        else if (games[gameSelectVal].borrower == null) {
+            games[gameSelectVal].borrower = borrowerNameVal;
+            message.innerHTML = `Игра выдана: ${borrowerNameVal}`
+            games[gameSelectVal].quantity -= 1;
+            renderGames();
+        }
+        else if (games[gameSelectVal].borrower != null) {
+            games[gameSelectVal].borrower += borrowerNameVal;
+            message.innerHTML = `Игра выдана: ${borrowerNameVal}`
+            games[gameSelectVal].quantity -= 1;
+            renderGames(); 
+        }
+        else if (games[gameSelectVal].borrower > games[gameSelectVal].quantity) {
+            message.innerHTML = `Игра уже выдана: ${games[gameSelectVal].borrower}`
+        }
     }
-    else if (games[gameSelectVal].borrower == null) {
-        games[gameSelectVal].borrower = borrowerNameVal;
-        message.innerHTML = `Игра выдана: ${borrowerNameVal}`
-        renderGames();
+    else {
+        message.innerHTML = 'Все игры уже заняты';
     }
-    else if (games[gameSelectVal].borrower !== null) {
-        message.innerHTML = `Игра уже выдана: ${games[gameSelectVal].borrower}`
-    }
+
 });
 
 
@@ -134,7 +147,7 @@ function renderGames() {
 
             const borrower = document.createElement('p')
             borrower.className = 'borrower'
-            borrower.textContent = games[index].borrower;
+            borrower.textContent = games[index].borrower ;
 
             const players = document.createElement('p');
             players.className = 'players'
