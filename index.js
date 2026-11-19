@@ -19,7 +19,7 @@ const addGame = document.getElementById('addGame');
 const QuantityGame = document.getElementById('QuantityGame');
 const redactQuantity = document.getElementById('redactQuantity');
 const newQuantity = document.getElementById('NewQuantity');
-
+const newQuantityMinus = document.getElementById('NewQuantityMinus')
 
 
 renderGames();
@@ -34,6 +34,21 @@ addGame.addEventListener('click', () => {
     renderGames();
     renderOptions();
 });
+
+
+newQuantityMinus.addEventListener('click', () => {
+    const gameSelectVal = +gameSelect.value
+    const redactQuantityVal = Number(redactQuantity.value);
+    
+    if (isNaN(redactQuantityVal) || redactQuantityVal <= 0) {
+        alert('Введите число от 1');
+        return;
+    }
+
+    games[gameSelectVal].quantity -= redactQuantityVal;
+    renderGames()
+
+})
 
 newQuantity.addEventListener('click', () => {
     const gameSelectVal = +gameSelect.value
