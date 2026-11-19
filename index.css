@@ -20,7 +20,7 @@ body {
 }
 
 .container {
-    background: radial-gradient(circle, rgb(200, 235, 255) 0%, rgb(215, 205, 255) 50%, rgb(255, 215, 220) 100%);
+    background-color: rgb(234, 243, 253);
     grid-row: 2;
     grid-column: 2;
     border-radius: 2%;
@@ -47,7 +47,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgb(67, 44, 70);
+    color: rgb(39, 38, 39);
 }
 
 .ptoct {}

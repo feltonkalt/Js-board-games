@@ -1,7 +1,7 @@
 let games = [
-    { title: 'Каркассон', players: '4', borrower: [null], quantity: 4, },
+    { title: 'Каркассон', players: '4', borrower: [], quantity: 4, },
     { title: 'Доббль', players: '6', borrower: ['Аня'], quantity: 3 },
-    { title: 'Шахматы', players: '2', borrower: [null], quantity: 5 },
+    { title: 'Шахматы', players: '2', borrower: [], quantity: 5 },
 ];
 
 
@@ -12,12 +12,10 @@ const gameSelect = document.getElementById('gameSelect');
 const gameList = document.getElementById('gameList');
 const borrowerName = document.getElementById('borrowerName');
 const message = document.getElementById('message');
-const gameSelectVal = Number(gameSelect.value.trim());
 const freeGame = document.getElementById('freeGame');
 const NameGame = document.getElementById('NameGame');
 const PlayerGame = document.getElementById('PlayersGame');
 const addGame = document.getElementById('addGame');
-const gameSelectUl = document.getElementById('gameSelectUl');
 const QuantityGame = document.getElementById('QuantityGame');
 
 
@@ -40,68 +38,54 @@ addGame.addEventListener('click', () => {
 
 borrowButton.addEventListener('click', () => {
     const borrowerNameVal = borrowerName.value.trim();
-
-    games[gameSelectVal];
-
-    if (games[gameSelectVal].quantity > 0) {
-        if (borrowerNameVal == null) {
-            message.innerHTML = 'Введите имя'
-        }
-        else if (games[gameSelectVal].borrower == null) {
-            games[gameSelectVal].borrower.push(borrowerNameVal);
-            message.innerHTML = `Игра выдана: ${borrowerNameVal}`;
-            games[gameSelectVal].quantity -= 1;
-            renderGames();
-        }
-        else if (games[gameSelectVal].borrower != null) {
-            games[gameSelectVal].borrower.push(borrowerNameVal);
-            message.innerHTML = `Игра выдана: ${borrowerNameVal}`
-            games[gameSelectVal].quantity -= 1;
-            renderGames();
-        }
-        else if (games[gameSelectVal].borrower > games[gameSelectVal].quantity) {
-            message.innerHTML = `Игра уже выдана: ${games[gameSelectVal].borrower}`
-        }
-    }
-    else {
+    const gameSelectVal = +gameSelect.value
+    if (games[gameSelectVal].quantity <= 0) {
         message.innerHTML = 'Все игры уже заняты';
+        return;
     }
 
-});
+    if (borrowerNameVal == null) {
+        message.innerHTML = 'Введите имя'
+        return;
+    }
 
+    games[gameSelectVal].borrower.push(borrowerNameVal);
+    message.innerHTML = `Игра выдана: ${borrowerNameVal}`
+    games[gameSelectVal].quantity -= 1;
+    renderGames();
+});
 
 
 returnButton.addEventListener('click', () => {
-    games[gameSelectVal];
     const borrowerNameVal = borrowerName.value.trim();
+    const gameSelectVal = +gameSelect.value
 
     if (borrowerNameVal == null) {
         message.innerHTML = 'Введите имя пользователя'
+        return;
     }
-    else if (games[gameSelectVal].borrower == borrowerNameVal) {
-        message.innerHTML = 'Игра возвращена';
-        games[gameSelectVal].borrower.forEach(borrower => {
-            if (games[gameSelectVal].borrower == borrowerNameVal) {
-                games[gameSelectVal].borrower.splice(borrower)
-            }
-        });
+    if (games[gameSelectVal.QuantityGameVal < 0]) {
+        message.innerHTML = 'Игра уже свободна';
+        return;
+    }
+
+    const index = games[gameSelectVal].borrower.findIndex(x => x === borrowerNameVal);
+    if (index >= 0) {
         games[gameSelectVal].quantity += 1;
-        renderGames()
+        message.innerHTML = 'Игра возвращена';
+        games[gameSelectVal].borrower.splice(index, 1);
     }
-    else if (games[gameSelectVal.QuantityGameVal < 0]) {
-        message.innerHTML = 'Игра уже свободна'
+    else {
+        message.innerHTML = 'Этот человек не брал эту игру';
     }
+
+    renderGames()
+
 });
 
 
-
 freeGame.addEventListener('change', () => {
-    if (freeGame.checked) {
-        renderGames();
-    }
-    else {
-        renderGames();
-    }
+    renderGames();
 });
 
 function renderGames() {
@@ -109,38 +93,38 @@ function renderGames() {
     if (freeGame.checked) {
 
         games.forEach((freeGames, index) => {
-            if (games[index].quantity > 0) {
-                const item = document.createElement('li');
-                item.className = 'item';
-
-                const div = document.createElement('div');
-                div.className = 'div';
-
-                const title = document.createElement('h1');
-                title.className = 'title';
-                title.textContent = games[index].title;
-
-                const players = document.createElement('p');
-                players.className = 'players'
-                players.textContent = `Игроки: ${games[index].players}`;
-
-                const borrower = document.createElement('p')
-                borrower.className = 'borrower'
-                borrower.textContent += games[index].borrower.join('|');
-
-                const quantityGames = document.createElement('p');
-                quantityGames.className = 'quantity';
-                quantityGames.textContent = ` Всего игр: ${games[index].quantity}`;
-
-                div.append(title, players, quantityGames, borrower);
-                item.append(div);
-
-                gameList.append(item);
-
-            }
-            else {
+            if (games[index].quantity <= 0) {
                 message.innerHTML = 'Свободных игр пока нет';
+                return;
             }
+
+            const item = document.createElement('li');
+            item.className = 'item';
+
+            const div = document.createElement('div');
+            div.className = 'div';
+
+            const title = document.createElement('h1');
+            title.className = 'title';
+            title.textContent = games[index].title;
+
+            const players = document.createElement('p');
+            players.className = 'players'
+            players.textContent = `Игроки: ${games[index].players}`;
+
+            const borrower = document.createElement('p')
+            borrower.className = 'borrower'
+            borrower.textContent += games[index].borrower.join(', ');
+
+            const quantityGames = document.createElement('p');
+            quantityGames.className = 'quantity';
+            quantityGames.textContent = ` Всего игр: ${games[index].quantity}`;
+
+            div.append(title, players, quantityGames, borrower);
+            item.append(div);
+
+            gameList.append(item);
+
         });
     }
     else {
@@ -159,7 +143,7 @@ function renderGames() {
             borrower.className = 'borrower'
             if (game.borrower) {
                 console.log(game.borrower)
-                borrower.textContent = game.borrower.join('|');
+                borrower.textContent = game.borrower.join(', ');
             }
 
             const players = document.createElement('p');
@@ -210,15 +194,16 @@ function addGameFunc() {
 };
 
 function renderOptions() {
-    gameSelectUl.innerHTML = '';
+    gameSelect.innerHTML = '';
 
     games.forEach((element, index) => {
 
-        const options = document.createElement('option');
-        options.className = 'option';
-        options.textContent = games[index].title;
-        options.value
+        const optionElem = document.createElement('option');
+        optionElem.className = 'option';
+        optionElem.textContent = games[index].title;
+        optionElem.value = "" + index
+        console.log(optionElem.value)
 
-        gameSelectUl.append(options);
+        gameSelect.append(optionElem);
     });
 };
