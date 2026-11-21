@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(90deg, rgb(210, 155, 95) 0%, rgb(255, 235, 185) 100%);
+    background: linear-gradient(180deg, rgb(255, 248, 248) 62%, rgb(247, 76, 125) 89%);
     min-height: 100vh;
     height: 100%;
     display: grid;
@@ -7,9 +7,10 @@ body {
     grid-template-rows: 10% auto 10%;
 }
 
+
 .press-start-2p-regular {
     font-family: "Press Start 2P", system-ui;
-    font-weight: 400;
+    font-weight: 100;
     font-style: normal;
 }
 
@@ -20,7 +21,7 @@ body {
 }
 
 .container {
-    background-color: rgb(234, 243, 253);
+    background-color: rgb(255, 248, 248);
     grid-row: 2;
     grid-column: 2;
     border-radius: 2%;
@@ -28,41 +29,46 @@ body {
     grid-template-columns: 5% 90% 5%;
     display: grid;
     height: auto;
-    box-shadow: 0px 2px 20px rgb(156, 119, 78);
+    box-shadow: 0px 2px 20px rgb(247, 76, 125);
 }
 
 .all {
     grid-row: 2;
     grid-column: 2;
-    
+
 }
 
 .zag {
-    font-family: "Press Start 2P", system-ui;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 46px;
+    font-size: 43px;
     margin-bottom: 15px;
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgb(39, 38, 39);
+    color: rgb(39, 28, 45);
+    display: inline-block;
+    transform-origin: center;
+    transform: scaleY(1.5);
+    font-family: "Press Start 2P", system-ui;
+    font-weight: 400;
+    font-style: normal;
+
 }
 
 .ptoct {}
 
 .freeGame {
-    font-family: "Roboto", sans-serif;
+    font-family: "Comfortaa", sans-serif;
     font-optical-sizing: auto;
     font-weight: 700;
     font-style: normal;
-    font-variation-settings:
-        "wdth" 100;
-    font-size: 20px;
-    color: rgb(47, 34, 59);
-    margin-bottom: 30px;
+    color: rgb(39, 28, 45);
 }
+
+#freeGame {
+    margin-top: 20px;
+}
+
 
 .Procat {
     grid-column: 2;
@@ -72,11 +78,58 @@ body {
 ul {
     list-style-type: none;
 }
-.divProcat{
+
+.divProcat {
     display: flex;
     flex-direction: row;
     gap: 50px;
 }
-.add{
-   
+
+.add {}
+
+.title {
+    color: rgb(39, 28, 45);
+    display: inline-block;
+    transform-origin: center;
+    transform: scaleY(1.5);
+    font-family: "Press Start 2P", system-ui;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 30px;
+    margin: 15px;
+
+}
+
+button {
+    font-family: "Comfortaa", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    color: rgb(39, 28, 45);
+    border-radius: 18px;
+    height: auto;
+    width: auto;
+    padding: 2px;
+    background-color: rgb(255, 248, 248);
+}
+
+button:hover {
+    background-color: rgba(247, 76, 125, 0.651);
+}
+
+input {
+    font-family: "Comfortaa", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    color: rgb(39, 28, 45);
+    border-radius: 8px;
+    height: auto;
+    width: auto;
+    padding: 2px;
+    background-color: rgb(255, 248, 248);
+}
+
+input:hover {
+    background-color: rgba(247, 76, 125, 0.445);
 }

@@ -12,6 +12,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:ital,wght@0,700;1,700&display=swap"
         rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -20,8 +23,6 @@
             <h1 class="zag">Прокат настольных игр</h1>
             <div class="divProcat">
                 <div class="ptoct">
-                    <input type="checkbox" id='freeGame'>
-                    <label for="freeGame" class="freeGame"> показать только свободные игры</label>
                     <ul id="gameList"></ul>
                 </div>
                 <div class="Procat">
@@ -38,7 +39,6 @@
                     <input type="text" id="redactQuantity">
 
                     </label>
-                    <input type="text" id="redactQuantityMinus">
                     <button id="NewQuantity">Добавить</button>
                     <button id="NewQuantityMinus"> Списать</button>
                 </div>
@@ -57,6 +57,8 @@
             <div class="addQuantity">
                 <label for=""></label>
             </div>
+            <input type="checkbox" id='freeGame'>
+            <label for="freeGame" class="freeGame"> показать только свободные игры</label>
         </div>
     </div>
 

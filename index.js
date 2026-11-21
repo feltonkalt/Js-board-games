@@ -6,20 +6,20 @@ let games = [
 
 
 
-const borrowButton = document.getElementById('borrowButton');
-const returnButton = document.getElementById('returnButton');
-const gameSelect = document.getElementById('gameSelect');
-const gameList = document.getElementById('gameList');
-const borrowerName = document.getElementById('borrowerName');
-const message = document.getElementById('message');
-const freeGame = document.getElementById('freeGame');
-const NameGame = document.getElementById('NameGame');
-const PlayerGame = document.getElementById('PlayersGame');
-const addGame = document.getElementById('addGame');
-const QuantityGame = document.getElementById('QuantityGame');
-const redactQuantity = document.getElementById('redactQuantity');
-const newQuantity = document.getElementById('NewQuantity');
-const newQuantityMinus = document.getElementById('NewQuantityMinus')
+const borrowButton = document.getElementById('borrowButton'); //кнока выдать
+const returnButton = document.getElementById('returnButton');  // кнопка вернуть
+const gameSelect = document.getElementById('gameSelect'); // поле с выбранной игрой
+const gameList = document.getElementById('gameList'); // место под генерацию игр
+const borrowerName = document.getElementById('borrowerName'); // имя кому выдать инпут
+const message = document.getElementById('message'); // место для ошибки
+const freeGame = document.getElementById('freeGame'); // чекбокс для свободных игр
+const NameGame = document.getElementById('NameGame'); //имя для добавленной игры
+const PlayerGame = document.getElementById('PlayersGame'); // кол-во игроков в новой игре
+const addGame = document.getElementById('addGame');// кнопка добавить игру
+const QuantityGame = document.getElementById('QuantityGame'); // поле для ввода нового еол-ва игр
+const redactQuantity = document.getElementById('redactQuantity'); // поле для новго кол-ва уже игры
+const newQuantity = document.getElementById('NewQuantity'); // кнопка добавить новое кол-во
+const newQuantityMinus = document.getElementById('NewQuantityMinus') // кнопка списать кол-во
 
 
 renderGames();
@@ -39,9 +39,13 @@ addGame.addEventListener('click', () => {
 newQuantityMinus.addEventListener('click', () => {
     const gameSelectVal = +gameSelect.value
     const redactQuantityVal = Number(redactQuantity.value);
-    
+
     if (isNaN(redactQuantityVal) || redactQuantityVal <= 0) {
         alert('Введите число от 1');
+        return;
+    }
+    if (redactQuantityVal > games[gameSelectVal].quantity) {
+        alert('Нельзя списать больше чем имеется');
         return;
     }
 
@@ -58,7 +62,6 @@ newQuantity.addEventListener('click', () => {
         alert('Введите число от 1');
         return;
     }
-
     games[gameSelectVal].quantity += redactQuantityVal;
     renderGames()
 });
@@ -222,7 +225,7 @@ function addGameFunc() {
         games.push({
             title: NameGameVal,
             players: PlayerGameVal,
-            borrower: null,
+            borrower: '',
             quantity: QuantityGameVal,
         })
     }
@@ -244,3 +247,4 @@ function renderOptions() {
         gameSelect.append(optionElem);
     });
 };
+
